@@ -21,7 +21,7 @@ class CartItemModel extends CartItemEntity {
     );
   }
 
-  Map<String, dynamic> tomap() {
+  Map<String, dynamic> toMap(){
     return {
       'productId': productId,
       'productName': productName,
