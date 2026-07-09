@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fullName => 'Full Name';
 
   @override
-  String get phoneNumber => 'Phone Number';
+  String get phoneNumber => 'Phone number is not valid';
 
   @override
   String get logout => 'Logout';
@@ -88,6 +88,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorInvalidPassword => 'Password must be at least 6 characters';
+
+  @override
+  String get invalidPassword => 'Password require';
 
   @override
   String get errorPasswordMismatch => 'Passwords do not match';
