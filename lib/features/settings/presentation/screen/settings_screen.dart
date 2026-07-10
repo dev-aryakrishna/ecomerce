@@ -10,6 +10,7 @@ import 'package:ecomerceapp/core/themes/theme_service.dart';
 import 'package:ecomerceapp/core/utils/notification_service.dart';
 import 'package:ecomerceapp/router/route_names.dart';
 import 'package:ecomerceapp/l10n/app_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -122,7 +123,13 @@ class SettingsScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.info_outline),
               title: Text(l10n.version),
-              trailing: const Text('1.0.0'),
+              trailing: FutureBuilder<PackageInfo>(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const Text('...');
+                  return Text(snapshot.data!.version);
+                },
+              ),
             ),
             const Divider(),
 
