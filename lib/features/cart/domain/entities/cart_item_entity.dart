@@ -1,3 +1,6 @@
+import 'package:ecomerceapp/core/utils/price_calculation.dart';
+
+
 class CartItemEntity {
 
   final int productId;
@@ -23,14 +26,15 @@ class CartItemEntity {
 
   /// Amount saved on this line item vs. its original price, or 0 if it
   /// wasn't discounted.
-  double get savings =>
-      (originalPrice != null && originalPrice! > price)
-          ? (originalPrice! - price) * quantity
-          : 0;
+  double get savings =>PriceCalculation.savingsFor(
+    price: price, 
+    originalPrice: originalPrice, 
+    quantity: quantity
+  );
 
-  double get discountPercentage =>
-      (originalPrice != null && originalPrice! > 0)
-          ? ((originalPrice! - price) / originalPrice! * 100)
-          : 0;
+  double get discountPercentage =>  PriceCalculation.discountPercentageForm(
+    price: price, 
+    originalPrice: originalPrice
+  ).toDouble();
 
 }

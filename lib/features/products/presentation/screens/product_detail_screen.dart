@@ -8,6 +8,8 @@ import 'package:ecomerceapp/features/products/presentation/bloc/product_detail/p
 import 'package:ecomerceapp/features/products/presentation/bloc/product_detail/product_detail_event.dart';
 import 'package:ecomerceapp/features/products/presentation/bloc/product_detail/product_detail_state.dart';
 import 'package:ecomerceapp/l10n/app_localizations.dart';
+import 'package:ecomerceapp/core/utils/price_calculation.dart';
+
 
 class ProductDetailScreen extends StatefulWidget {
   final int productId;
@@ -120,7 +122,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         if (product.discountPercentage > 0) ...[
                           Text(
-                            '\$${(product.price / (1 - product.discountPercentage / 100)).toStringAsFixed(2)}',
+                            '\$${(PriceCalculation.originalPriceForm(price: product.price, discountPercentage: product.discountPercentage))!.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.grey,
@@ -230,10 +232,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                           price: product.price,
                                           productImage: product.thumbnail,
                                           quantity: _quantity,
-                                          originalPrice: product.discountPercentage > 0
-                                              ? product.price /
-                                                  (1 - product.discountPercentage / 100)
-                                              : null,
+                                          originalPrice: PriceCalculation.originalPriceForm(price: product.price, discountPercentage: product.discountPercentage)
                                         ),
                                       ),
                                     );

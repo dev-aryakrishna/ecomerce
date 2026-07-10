@@ -124,14 +124,12 @@ class SettingsScreen extends StatelessWidget {
               leading: const Icon(Icons.info_outline),
               title: Text(l10n.version),
               trailing: FutureBuilder<PackageInfo>(
-                future: PackageInfo.fromPlatform(), builder: (context , snapshot){
-
-                   if(!snapshot.hasData) return const Text('...');
-                   return Text(snapshot.data!.version);
-
-                }
-               
-                ),
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return const Text('...');
+                  return Text(snapshot.data!.version);
+                },
+              ),
             ),
             const Divider(),
 
