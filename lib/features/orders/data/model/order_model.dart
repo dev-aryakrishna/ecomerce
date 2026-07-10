@@ -12,15 +12,26 @@ class OrderModel extends OrderEntity {
 
   factory OrderModel.fromMap(Map<String, dynamic> map) {
     return OrderModel(
-      orderId: map['order_id'] as String,
-      products: List<Map<String, dynamic>>.from(
-        jsonDecode(map['products'] as String),
-      ),
-      totalAmount: map['total_amount'] as double,
-      orderDate: map['order_date'] as String,
-      orderStatus: map['order_status'] as String,
+      orderId: map['order_id'] as String ? ?? '',
+      products: _parseProducts(map['products']),
+      totalAmount: (map['total_amount']as num?)?.toDouble() ?? 0.0,
+      orderDate: map['order_date'] as String ? ?? '',
+      orderStatus: map['order_status'] as String ? ?? 'unknown',
     );
   }
+
+   static List<Map<String, dynamic>> _parseProducts(Object? raw){
+    if(raw is! String || raw.isEmpty) return const[];
+    try{
+      final decoded = jsonDecode(raw);
+      if(decoded is! List) return const[];
+      return List <Map<String , dynamic>>.from(decoded);
+    }
+    catch(_){
+      return const[];
+    }
+
+   }
 
   Map<String, dynamic> toMap() {
     return {
@@ -31,4 +42,5 @@ class OrderModel extends OrderEntity {
       'order_status': orderStatus,
     };
   }
+  
 }
