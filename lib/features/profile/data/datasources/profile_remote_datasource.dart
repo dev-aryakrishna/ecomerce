@@ -43,6 +43,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       if (phoneNumber != null) 'phone_number': phoneNumber,
     };
 
+    try{
+
     final response = await supabase.auth.updateUser(
       UserAttributes(data: metadata),
     );
@@ -53,5 +55,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     }
 
     return ProfileModel.fromSupabaseUser(updatedUser);
+    }
+    on AuthException catch(e){
+      throw ServerException(e.message);
+    }catch(e){
+      if(e is ServerException) rethrow;
+      throw UnknownException('something went wrong');
+    }
   }
 }
