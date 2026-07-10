@@ -140,7 +140,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'Phone Number'**
+  /// **'Phone number is not valid'**
   String get phoneNumber;
 
   /// No description provided for @logout.
@@ -256,6 +256,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
   String get errorInvalidPassword;
+
+  /// No description provided for @invalidPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password require'**
+  String get invalidPassword;
 
   /// No description provided for @errorPasswordMismatch.
   ///

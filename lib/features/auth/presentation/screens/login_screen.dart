@@ -1,3 +1,4 @@
+import 'package:ecomerceapp/core/validation/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -95,12 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: l10n.email,
                           prefixIcon: const Icon(Icons.email_outlined),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return l10n.emailRequired;
-                          }
-                          return null;
-                        },
+                        validator:(value) => Validators.email(context, value),
+
                       ),
                       const SizedBox(height: AppSpacing.md),
                       TextFormField(
@@ -117,12 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 () => _obscurePassword = !_obscurePassword),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.length < 6) {
-                            return l10n.errorInvalidPassword;
-                          }
-                          return null;
-                        },
+                        validator:(value) => Validators.password(context, value),
                       ),
                       const SizedBox(height: AppSpacing.xl),
                       PrimaryButton(

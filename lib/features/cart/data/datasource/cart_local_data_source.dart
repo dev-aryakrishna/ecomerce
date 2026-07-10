@@ -32,7 +32,7 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
     final db = await database;
     await db.insert(
       AppConstants.cartTable,
-      item.tomap(),
+      item.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

@@ -9,6 +9,7 @@ import 'package:ecomerceapp/router/route_names.dart';
 import 'package:ecomerceapp/l10n/app_localizations.dart';
 import 'package:ecomerceapp/core/themes/app_colors.dart';
 import 'package:ecomerceapp/core/theme/app_spacing.dart';
+import 'package:ecomerceapp/core/validation/validators.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -101,12 +102,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         labelText: l10n.fullName,
                         prefixIcon: Icon(Icons.person_2_outlined),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.fullNameRequired;
-                        }
-                        return null;
-                      },
+                      validator: (value) => Validators.fullName(context, value),
+
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -116,12 +113,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         prefixIcon: Icon(Icons.phone_android),
                       ),
                       keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.phoneNumberRequired;
-                        }
-                        return null;
-                      },
+                      validator:(value) => Validators.phone(context, value),
+
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -130,12 +123,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         labelText: l10n.email,
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
-                      validator: (value) {
-                        if (value == null || !value.contains('@')) {
-                          return l10n.validEmailRequired;
-                        }
-                        return null;
-                      },
+                      validator:(value) => Validators.email(context, value),
+
                     ),
                     const SizedBox(height: AppSpacing.md),
                     TextFormField(
@@ -155,12 +144,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.length < 6) {
-                          return l10n.errorInvalidPassword;
-                        }
-                        return null;
-                      },
+                      validator:(value) => Validators.password(context, value),
+
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -176,12 +161,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       ),
                       obscureText: _obscureConfirmPassword,
-                      validator: (value) {
-                        if (value != _passwordController.text) {
-                          return l10n.errorPasswordMismatch;
-                        }
-                        return null;
-                      },
+                      validator: (value) => Validators.confirmPassword(
+                        context,
+                        value,
+                       _passwordController.text,
+                      ),
                     ),
                     const SizedBox(height: 24),
                     state is SignupLoading

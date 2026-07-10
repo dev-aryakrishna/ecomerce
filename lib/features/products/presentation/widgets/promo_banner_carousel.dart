@@ -57,18 +57,14 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
         Icons.local_fire_department_rounded,
         const [Color(0xFFFF6584), Color(0xFFEF4444)],
       ),
-      _Banner(
-        l10n.arrivals,
-        l10n.fresh,
-        Icons.auto_awesome_rounded,
-        const [Color(0xFF6C63FF), Color(0xFF4F46E5)],
-      ),
-      _Banner(
-        l10n.topRated,
-        l10n.highly,
-        Icons.star_rounded,
-        const [Color(0xFFF59E0B), Color(0xFFEA580C)],
-      ),
+      _Banner(l10n.arrivals, l10n.fresh, Icons.auto_awesome_rounded, const [
+        Color(0xFF6C63FF),
+        Color(0xFF4F46E5),
+      ]),
+      _Banner(l10n.topRated, l10n.highly, Icons.star_rounded, const [
+        Color(0xFFF59E0B),
+        Color(0xFFEA580C),
+      ]),
     ];
     return Column(
       children: [
@@ -93,7 +89,10 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
                     boxShadow: AppShadows.card,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -121,7 +120,11 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
                             ],
                           ),
                         ),
-                        Icon(banner.icon, color: Colors.white.withOpacity(0.85), size: 44),
+                        Icon(
+                          banner.icon,
+                          color: Colors.white.withOpacity(0.85),
+                          size: 44,
+                        ),
                       ],
                     ),
                   ),
@@ -130,7 +133,7 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
             },
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // extra space
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
@@ -141,7 +144,9 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
               width: _index == i ? 16 : 6,
               height: 6,
               decoration: BoxDecoration(
-                color: _index == i ? banners[i].gradient.first : Colors.grey.shade300,
+                color: _index == i
+                    ? banners[i].gradient.first
+                    : Colors.grey.shade300,
                 borderRadius: AppRadius.pillRadius,
               ),
             ),
