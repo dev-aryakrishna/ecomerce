@@ -1,6 +1,6 @@
 name: ecomerceapp
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -33,6 +33,7 @@ dependencies:
   path: ^1.9.1
   flutter_local_notifications: ^18.0.1
   carousel_slider: ^5.0.0
+  package_info_plus: ^10.2.0
 
 dev_dependencies:
   flutter_test:
