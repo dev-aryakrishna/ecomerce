@@ -41,9 +41,11 @@ class _StoreListingView extends StatefulWidget {
 }
 
 class _StoreListingViewState extends State<_StoreListingView> {
+  final ValueNotifier <String?> _selectedCategoryNotifier = ValueNotifier(null);
+  String? get _selectedCategory => _selectedCategoryNotifier.value;
   final _searchController = TextEditingController();
   final _scrollController = ScrollController();
-  String? _selectedCategory;
+
   String _query = '';
 
   @override
@@ -54,6 +56,7 @@ class _StoreListingViewState extends State<_StoreListingView> {
 
   @override
   void dispose() {
+    _selectedCategoryNotifier.dispose();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     _searchController.dispose();
@@ -149,14 +152,16 @@ class _StoreListingViewState extends State<_StoreListingView> {
                                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
                                 child: SizedBox(
                                   height: 44,
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
+                                  child: ValueListenableBuilder(
+                                  valueListenable: _selectedCategoryNotifier, builder: (context , selected , _){
+                                    return ListView( scrollDirection: Axis.horizontal,
+                                  
                                     children: [
                                       CategoryChip(
                                         label: l10n.allCategoriesLabel,
                                         selected: _selectedCategory == null,
                                         onTap: () {
-                                          setState(() => _selectedCategory = null);
+                                          setState(() => _selectedCategoryNotifier.value = null);
                                           _applyFilter();
                                         },
                                       ),
@@ -165,12 +170,12 @@ class _StoreListingViewState extends State<_StoreListingView> {
                                           label: category,
                                           selected: _selectedCategory == category,
                                           onTap: () {
-                                            setState(() => _selectedCategory = category);
+                                            setState(() => _selectedCategoryNotifier.value = category);
                                             _applyFilter();
                                           },
                                         ),
                                     ],
-                                  ),
+                                   );} ),
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.md),
