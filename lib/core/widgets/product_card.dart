@@ -4,6 +4,7 @@ import '../theme/app_radius.dart';
 import '../theme/app_shadows.dart';
 import 'price_widget.dart';
 import 'rating_widget.dart';
+import 'package:ecomerceapp/core/utils/price_calculation.dart';
 
 /// The single source of truth for how a product looks in a grid — Store,
 /// Category, Search, and Wishlist should all use this instead of building
@@ -34,10 +35,11 @@ class ProductCard extends StatelessWidget {
     this.discountPercentage = 0,
   });
 
-  double? get _originalPrice => discountPercentage > 0
-      ? price / (1 - discountPercentage / 100)
-      : null;
-
+  double? get _originalPrice => PriceCalculation.originalPriceForm(
+    price: price, 
+    discountPercentage: discountPercentage
+    );
+      
   @override
   Widget build(BuildContext context) {
     return Material(

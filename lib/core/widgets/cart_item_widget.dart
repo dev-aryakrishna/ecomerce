@@ -3,6 +3,8 @@ import '../themes/app_colors.dart';
 import '../theme/app_radius.dart';
 import 'price_widget.dart';
 import 'quantity_selector.dart';
+import 'package:ecomerceapp/core/utils/price_calculation.dart';
+
 
 /// Row used for each line item on the Cart screen.
 class CartItemWidget extends StatelessWidget {
@@ -32,9 +34,11 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasDiscount = originalPrice != null && originalPrice! > price;
-    final discountPercent = hasDiscount
-        ? ((originalPrice! - price) / originalPrice! * 100).round()
-        : 0;
+    final discountPercent = PriceCalculation.discountPercentageForm(
+      price: price, 
+      originalPrice: originalPrice
+    );
+        
 
     return Container(
       padding: const EdgeInsets.all(12),
