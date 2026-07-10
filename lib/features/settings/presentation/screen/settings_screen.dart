@@ -129,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                    if(!snapshot.hasData) return const Text('...');
                    return Text(snapshot.data!.version);
 
-                }
+                }// package _info_plus used
                
                 ),
             ),
